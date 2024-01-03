@@ -83,7 +83,12 @@ int main(int argc, TCHAR *argv[])
     ZeroMemory( &pi, sizeof(pi));
     si.cb = sizeof(si);
 
-    if(!CreateProcess(NULL, targetExe, NULL, NULL, FALSE, CREATE_SUSPENDED | CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi)) 
+
+    //BOOL result = CreateProcess(NULL, targetExe, NULL, NULL, FALSE, CREATE_SUSPENDED | CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi);
+    BOOL result = CreateProcess(NULL, targetExe, NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &si, &pi);
+    //BOOL result = CreateProcess(NULL, targetExe, NULL, NULL, FALSE, NULL, NULL, NULL, &si, &pi);
+
+    if(!result) 
     {
         std::cout << "CreateProcess failed: " << GetLastError() << std::endl;
         return 1;
