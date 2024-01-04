@@ -23,7 +23,7 @@ void inject_DLL(TCHAR *dllPath, HANDLE process)
     pathLen= _tcslen(dllPath) * sizeof(TCHAR);
 
     kernel32= GetModuleHandle(_T("kernel32.dll"));
-    loadlibrary= GetProcAddress(kernel32, _T("LoadLibraryA"));
+    loadlibrary= GetProcAddress(kernel32, "LoadLibraryW");
 
     lpBaseAddress= VirtualAllocEx(process, NULL, pathLen, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
     if (lpBaseAddress == NULL)
@@ -50,7 +50,7 @@ void open_log(TCHAR *exePath)
 
     exePath[_tcslen(exePath) - 4]= '\0';
     _tcscat(logPath, exePath);
-    _tcscat(logPath, "_log.txt");
+    _tcscat(logPath, L"_log.txt");
 
     ShellExecute(0, 0, logPath, 0, 0 , SW_SHOW );
 }
@@ -75,8 +75,8 @@ int main(int argc, TCHAR *argv[])
         return 1;
     }
         
-    targetExe= _T(argv[1]);
-    dllName= _T(argv[2]);
+    targetExe= argv[1];
+    dllName= argv[2];
     GetFullPathName(dllName, MAX_PATH, dllPath, NULL);
 
     ZeroMemory( &si, sizeof(si));

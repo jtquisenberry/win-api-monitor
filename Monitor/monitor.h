@@ -48,7 +48,7 @@ int WINAPI ProxyConnect(SOCKET s, const sockaddr* name, int namelen)
     ** ws2_32 dll isn't loaded if the target process isn't using it (no need to hook in that case)
     */
     typedef int (WINAPI *WSAADDRESSTOSTRINGW)(LPSOCKADDR, DWORD, LPDWORD, LPWSTR, LPDWORD);
-    HMODULE hModule= GetModuleHandle("ws2_32");
+    HMODULE hModule= GetModuleHandle(L"ws2_32");
     WSAADDRESSTOSTRINGW WSAAddressToStringW= (WSAADDRESSTOSTRINGW) GetProcAddress(hModule, "WSAAddressToStringW");
 
     wchar_t addr[32];

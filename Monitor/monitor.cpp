@@ -58,11 +58,6 @@ __forceinline BOOL install_hook(HOOK_INFO *pHookInfo)
     if (MH_CreateHookApi(pHookInfo->lib, pHookInfo->target, pHookInfo->proxy, (LPVOID *)(pHookInfo->fp)) != MH_OK)
         return FALSE;
 
-    FILE* log2 = fopen("d:\\projects\\thefile4.txt", "a+");
-    fputs("abcdefghjklmn\n", log2);
-    fclose(log2);
-
-
     return TRUE;
 }
 
